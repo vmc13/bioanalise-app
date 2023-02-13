@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "835002627877",
+    "project_id": "bioanalise-4289e",
+    "storage_bucket": "bioanalise-4289e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:835002627877:android:56029ef0582bcaa11a8ccc",
+        "android_client_info": {
+          "package_name": "com.example.bioanalise_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "835002627877-hupf108p1fvennmrqqbq7iegbaq3ovs4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDtxNw3dzZPm24wi6RKNFt1MxY3kWmNsIc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "835002627877-hupf108p1fvennmrqqbq7iegbaq3ovs4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
