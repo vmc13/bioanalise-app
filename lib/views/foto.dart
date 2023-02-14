@@ -1,11 +1,10 @@
 import 'dart:io';
 import 'dart:async';
-import 'package:flutter/material.dart';
-
+import 'dart:math';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Fotos extends StatefulWidget {
   @override
@@ -13,19 +12,19 @@ class Fotos extends StatefulWidget {
 }
 
 class _Fotostate extends State<Fotos> with SingleTickerProviderStateMixin {
-  String imageUrl = ' ';
 
-   File? imageSelect;
+  File? imageSelect;
 
-  ImagePicker imagePicker = ImagePicker();
+  final ImagePicker _imagePicker = ImagePicker();
 
   CollectionReference _reference =
       FirebaseFirestore.instance.collection('gallery');
 
+
   pickImageCamera() async {
-
-    final XFile? image = await imagePicker.pickImage(source: ImageSource.camera);
-
+    final XFile? image =
+        await _imagePicker.pickImage(source: ImageSource.camera);
+    
     print('IMAGEM CAMERA: ${image?.path}');
 
     if (image != null) {
@@ -55,10 +54,9 @@ class _Fotostate extends State<Fotos> with SingleTickerProviderStateMixin {
   }
 
   pickImageGaleria() async {
-    ImagePicker imagePicker = ImagePicker();
-
     final XFile? image =
-        await imagePicker.pickImage(source: ImageSource.gallery);
+        await _imagePicker.pickImage(source: ImageSource.gallery);
+
     print('IMAGE: ${image?.path}');
 
     if (image != null) {
@@ -66,6 +64,7 @@ class _Fotostate extends State<Fotos> with SingleTickerProviderStateMixin {
         imageSelect = File(image.path);
       });
     }
+
     String uniqueFileName = DateTime.now().millisecondsSinceEpoch.toString();
 
     //Upload to Firebase Storage
@@ -86,11 +85,20 @@ class _Fotostate extends State<Fotos> with SingleTickerProviderStateMixin {
     }
   }
 
+/*
+  clearImage() {
+    setState(() {
+      imageSelect = null;
+    });
+  }
+*/
+
+  String imageUrl = ' ';
 
   uploadImage() {
-    setState(() {
+    setState(() async {
 // Create the file metadata
-      final metadata = SettableMetadata(contentType: "imageee/jpeg");
+      final metadata = SettableMetadata(contentType: "image/jpeg");
 
 // Create a reference to the Firebase Storage bucket
       final storageRef = FirebaseStorage.instance.ref();
@@ -139,6 +147,8 @@ class _Fotostate extends State<Fotos> with SingleTickerProviderStateMixin {
 
       print('URL DA IMAGEM: ${imageUrl}');
     });
+
+    
   }
 /*
   String title = 'BottomNavigationBar';
@@ -159,7 +169,7 @@ class _Fotostate extends State<Fotos> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: Colors.grey,
+          color: Colors.grey,
         child: Center(
           child: Column(
             mainAxisSize: MainAxisSize.max,
@@ -167,7 +177,7 @@ class _Fotostate extends State<Fotos> with SingleTickerProviderStateMixin {
             children: [
               AspectRatio(
                 //9/16
-                aspectRatio: 9 / 16,
+                aspectRatio: 9/16,
                 child: imageSelect == null
                     ? Container(
                         alignment: Alignment.center,
@@ -201,19 +211,20 @@ class _Fotostate extends State<Fotos> with SingleTickerProviderStateMixin {
                     onPressed: pickImageCamera,
                     child: const Icon(
                       Icons.camera_alt,
-                      color: Color.fromARGB(255, 255, 255, 255),
+                      color: Colors.white,
                     ),
                   ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         padding:
-                            EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+                            EdgeInsets.symmetric(horizontal: 40, vertical:
+                            10),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(15))),
                     onPressed: pickImageGaleria,
                     child: const Icon(
                       Icons.photo_library,
-                      color: Color.fromARGB(255, 255, 255, 255),
+                      color: Colors.white,
                     ),
                   ),
                 ],
@@ -228,11 +239,12 @@ class _Fotostate extends State<Fotos> with SingleTickerProviderStateMixin {
                   if (imageSelect != null)
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 35, vertical: 12),
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 35,
+                              vertical: 12),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15))),
-                      onPressed: uploadImage(),
+                      onPressed: uploadImage,
                       child: const Text(
                         "Salvar",
                         style: TextStyle(
@@ -243,11 +255,13 @@ class _Fotostate extends State<Fotos> with SingleTickerProviderStateMixin {
                   if (imageSelect != null)
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 30, vertical: 12),
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 30,
+                              vertical: 12),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15))),
                       onPressed: (){},
+                      //clearImage,
                       child: const Text(
                         "Eliminar",
                         style: TextStyle(
@@ -259,8 +273,9 @@ class _Fotostate extends State<Fotos> with SingleTickerProviderStateMixin {
               )
             ],
           ),
+          
         ),
-      ),
+      )
       /*
       bottomNavigationBar: Container(
         padding: EdgeInsets.all(16.0),
