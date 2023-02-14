@@ -14,6 +14,9 @@ class Cadastro extends StatefulWidget {
 
 class _CadastroState extends State<Cadastro> {
   final _nomeController = TextEditingController();
+  final _cpfController = TextEditingController();
+  final _dataController = TextEditingController();
+  final _phoneController = TextEditingController();
   final _emailController = TextEditingController();
   final _psController = TextEditingController();
   final _firebaseAuth = FirebaseAuth.instance;
@@ -40,6 +43,7 @@ class _CadastroState extends State<Cadastro> {
             ),
             //classe para incluir o email
             TextFormField(
+              keyboardType: TextInputType.name,
                 controller: _nomeController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
@@ -51,7 +55,8 @@ class _CadastroState extends State<Cadastro> {
             SizedBox(
               height: 10),
               TextFormField(
-                controller: _nomeController,
+                keyboardType: TextInputType.number,
+                controller: _cpfController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(25)
@@ -62,7 +67,8 @@ class _CadastroState extends State<Cadastro> {
             SizedBox(
               height: 10),
               TextFormField(
-                controller: _nomeController,
+                keyboardType: TextInputType.datetime,
+                controller: _dataController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(25)
@@ -73,7 +79,8 @@ class _CadastroState extends State<Cadastro> {
             SizedBox(
               height: 10),
               TextFormField(
-                controller: _nomeController,
+                keyboardType: TextInputType.phone,
+                controller: _phoneController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(25)
@@ -84,6 +91,7 @@ class _CadastroState extends State<Cadastro> {
             SizedBox(
               height: 10),
             TextFormField(
+              keyboardType: TextInputType.emailAddress,
                 controller: _emailController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
@@ -162,7 +170,7 @@ class _CadastroState extends State<Cadastro> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => Home()));
+                          builder: (context) => Login()));
                   }
                 ),
               ),
@@ -183,7 +191,7 @@ class _CadastroState extends State<Cadastro> {
         userCredential.user?.updateDisplayName(_nomeController.text);
         Navigator.pushAndRemoveUntil(
             context,
-            MaterialPageRoute(builder: (context) => Home()),
+            MaterialPageRoute(builder: (context) => Login()),
             (route) => false);
       }
     } on FirebaseAuthException catch (e) {
