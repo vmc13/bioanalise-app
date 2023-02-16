@@ -1,10 +1,12 @@
 import 'package:bioanalise_app/controllers/cadastro.dart';
 import 'package:bioanalise_app/views/home/home.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:bioanalise_app/database/usuarios.dart';
 
 
 class Login extends StatefulWidget {
@@ -174,6 +176,23 @@ class _LoginState extends State<Login> {
       ),
     );
   }
+/*
+  Future createUser({required String name}) async {
+  // Reference to document
+  final docUser = FirebaseFirestore.instance.collection('usuarios').doc();
+
+  final user = Usuario (
+    id: docUser.id,
+    nome: name,
+    email: _emailController.text,
+    telefone: _phoneController.text
+  );
+  
+  final json = user.toJson();
+  // Create document and write data to firebase
+  await docUser.set(json);
+}
+*/
 
   login() async {
     try {
