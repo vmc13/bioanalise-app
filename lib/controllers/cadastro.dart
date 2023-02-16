@@ -1,7 +1,10 @@
 import 'package:bioanalise_app/controllers/login.dart';
 import 'package:bioanalise_app/views/home/home.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
+import '../database/usuarios.dart';
 
 
 
@@ -147,9 +150,13 @@ class _CadastroState extends State<Cadastro> {
                           ),
                       ],
                     ),
-                    onPressed: () => {
-                      cadastrar()
-                    },
+                    onPressed: () {
+                      cadastrar();
+                      
+                      final name = _nomeController.text;
+
+                      createUser(name: name);
+                    }
                   ),
                 ),
               ),
@@ -181,6 +188,24 @@ class _CadastroState extends State<Cadastro> {
       )
     );
   }
+
+  Future createUser({required String name}) async {
+  // Reference to document
+  final docUser = FirebaseFirestore.instance.collection('usuarios').doc();
+
+  final user = Usuario (
+    id: docUser.id,
+    nome: name,
+    email: _emailController.text,
+    cpf: _cpfController.text,
+    data: _dataController.text,
+    phone: _phoneController.text
+  );
+  
+  final json = user.toJson();
+  // Create document and write data to firebase
+  await docUser.set(json);
+}
 
   cadastrar() async {
     try {
