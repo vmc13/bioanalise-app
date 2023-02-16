@@ -167,7 +167,7 @@ class _FotosState extends State<Fotos> with SingleTickerProviderStateMixin {
                       )
                     : Image.file(
                         File(imageSelect!.path),
-                        fit: BoxFit.cover,
+                        fit: BoxFit.contain,
                       ),
               ),
               SizedBox(
