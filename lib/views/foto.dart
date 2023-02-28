@@ -89,7 +89,7 @@ class _FotosState extends State<Fotos> with SingleTickerProviderStateMixin {
   uploadImage() {
     setState(() async {
 // Create the file metadata
-      final metadata = SettableMetadata(contentType: "imageee/jpeg");
+      final metadata = SettableMetadata(contentType: "meta/jpeg");
 
 // Create a reference to the Firebase Storage bucket
       final storageRef = FirebaseStorage.instance.ref();
@@ -112,11 +112,10 @@ class _FotosState extends State<Fotos> with SingleTickerProviderStateMixin {
             print("Upload was canceled");
             break;
           case TaskState.error:
-            // Handle unsuccessful uploads
+            print("An error ocurred!");
             break;
           case TaskState.success:
-            // Handle successful uploads on complete
-            // ...
+            print("Upload was succeful!");
             break;
         }
       });
@@ -137,6 +136,8 @@ class _FotosState extends State<Fotos> with SingleTickerProviderStateMixin {
       _reference.add(dataToSend);
 
       print('URL DA IMAGEM: ${imageUrl}');
+
+      
     });
   }
 
