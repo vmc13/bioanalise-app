@@ -17,7 +17,7 @@ class _HomeState extends State<Home> {
       body: Container(
         alignment: Alignment.center,
         child: SingleChildScrollView(
-          padding: EdgeInsets.all(32.0),
+          padding: EdgeInsets.all(40.0),
           child: Column(
             children: [
               SizedBox(
@@ -45,14 +45,14 @@ class _HomeState extends State<Home> {
                       ElevatedButton(
                           style: ButtonStyle(
                             minimumSize:
-                                MaterialStateProperty.all(Size(160, 130)),
+                                MaterialStateProperty.all(Size(150, 130)),
                             textStyle: MaterialStateProperty.all(TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.w700,
                             )),
                             shape: MaterialStatePropertyAll(
                                 RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10))),
+                                    borderRadius: BorderRadius.circular(30))),
                           ),
                           onPressed: () =>
                               Navigator.pushNamed(context, '/fotos'),
@@ -67,14 +67,14 @@ class _HomeState extends State<Home> {
                       ElevatedButton(
                           style: ButtonStyle(
                             minimumSize:
-                                MaterialStateProperty.all(Size(160, 130)),
+                                MaterialStateProperty.all(Size(150, 130)),
                             textStyle: MaterialStateProperty.all(TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.w700,
                             )),
                             shape: MaterialStatePropertyAll(
                                 RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10))),
+                                    borderRadius: BorderRadius.circular(30))),
                           ),
                           onPressed: () =>
                               Navigator.pushNamed(context, '/gallery'),
