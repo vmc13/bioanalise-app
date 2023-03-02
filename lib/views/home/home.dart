@@ -9,6 +9,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  final convenioController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,51 +27,66 @@ class _HomeState extends State<Home> {
               SizedBox(height: 70.0),
               Column(
                 children: [
-                  ElevatedButton(
-                      style: ButtonStyle(
-                        minimumSize: MaterialStateProperty.all(Size(160,
-                        130)),
-                        textStyle: MaterialStateProperty.all(TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w700,
-                        )),
-                        shape:
-                        MaterialStatePropertyAll(RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10))),
-                      ),
-                      onPressed: () =>
-                          Navigator.pushNamed(context, '/fotos'),
-                      child: Column(
-                        children: [
-                          Text('Camera'),
-                          SizedBox(height: 10),
-                          Icon(Icons.camera_alt)
-                        ],
-                      )),
-
+                  TextField(
+                    controller: convenioController,
+                    autofocus: false,
+                    keyboardType: TextInputType.name,
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(25)),
+                        prefixIcon: Icon(Icons.business),
+                        labelText: 'Convênio',
+                        hintText: "Insira convênio"),
+                  ),
                   SizedBox(height: 30),
-
-                  ElevatedButton(
-                      style: ButtonStyle(
-                        minimumSize: MaterialStateProperty.all(Size(160,
-                        130)),
-                        textStyle: MaterialStateProperty.all(TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w700,
-                        )),
-                        shape:
-                        MaterialStatePropertyAll(RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10))),
-                      ),
-                      onPressed: () =>
-                          Navigator.pushNamed(context, '/gallery'),
-                      child: Column(
-                        children: [
-                          Text('Galeria'),
-                          SizedBox(height: 10),
-                          Icon(Icons.photo_library)
-                        ],
-                      )),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      ElevatedButton(
+                          style: ButtonStyle(
+                            minimumSize:
+                                MaterialStateProperty.all(Size(160, 130)),
+                            textStyle: MaterialStateProperty.all(TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w700,
+                            )),
+                            shape: MaterialStatePropertyAll(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10))),
+                          ),
+                          onPressed: () =>
+                              Navigator.pushNamed(context, '/fotos'),
+                          child: Column(
+                            children: [
+                              Text('Camera'),
+                              SizedBox(height: 10),
+                              Icon(Icons.camera_alt)
+                            ],
+                          )),
+                      SizedBox(height: 30),
+                      ElevatedButton(
+                          style: ButtonStyle(
+                            minimumSize:
+                                MaterialStateProperty.all(Size(160, 130)),
+                            textStyle: MaterialStateProperty.all(TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w700,
+                            )),
+                            shape: MaterialStatePropertyAll(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10))),
+                          ),
+                          onPressed: () =>
+                              Navigator.pushNamed(context, '/gallery'),
+                          child: Column(
+                            children: [
+                              Text('Galeria'),
+                              SizedBox(height: 10),
+                              Icon(Icons.photo_library)
+                            ],
+                          )),
+                    ],
+                  ),
                 ],
               )
             ],

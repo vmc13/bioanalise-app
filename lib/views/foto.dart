@@ -115,7 +115,13 @@ class _FotosState extends State<Fotos> with SingleTickerProviderStateMixin {
             print("An error ocurred!");
             break;
           case TaskState.success:
-            print("Upload was succeful!");
+            print("Upload was successful!");
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Upload was successful'),
+                backgroundColor: Colors.greenAccent,
+              ),
+            );
             break;
         }
       });

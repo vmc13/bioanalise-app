@@ -64,6 +64,7 @@ class _LoginState extends State<Login> {
                       borderRadius: BorderRadius.circular(25)
                     ),
                     prefixIcon: Icon(Icons.person_rounded),
+                    labelText: 'Email',
                     hintText: "Digite E-mail"),
 
               ),
@@ -78,6 +79,7 @@ class _LoginState extends State<Login> {
                       borderRadius: BorderRadius.circular(25)
                     ),
                     prefixIcon: Icon(Icons.key),
+                    labelText: 'Senha',
                     hintText: 'Digite Senha',
                     suffixIcon: MouseRegion(
                       cursor: SystemMouseCursors.click,

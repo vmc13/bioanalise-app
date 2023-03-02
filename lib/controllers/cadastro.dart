@@ -4,6 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import 'package:bioanalise_app/views/home/home.dart';
+
 import '../database/usuarios.dart';
 
 
@@ -22,6 +24,7 @@ class _CadastroState extends State<Cadastro> {
   final _phoneController = TextEditingController();
   final _emailController = TextEditingController();
   final _psController = TextEditingController();
+  final _convenioController = TextEditingController();
   final _firebaseAuth = FirebaseAuth.instance;
 
   @override
@@ -29,7 +32,7 @@ class _CadastroState extends State<Cadastro> {
     return Scaffold(
       body: Container(
         alignment: Alignment.center,
-        child: SingleChildScrollView(padding: EdgeInsets.all(32.0),
+        child: SingleChildScrollView(padding: EdgeInsets.all(40.0),
         child: Column(
           children :[
             
@@ -37,7 +40,7 @@ class _CadastroState extends State<Cadastro> {
               height: 50,
             ),
             SizedBox(
-              height: 150,
+              height: 100,
               child: Image.asset('images/Bio.png'),
             ),
             //Separarção entre a foto e o espaço de loguin.
@@ -52,7 +55,8 @@ class _CadastroState extends State<Cadastro> {
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(25)
                     ),
-                    label: Text('Digite seu nome'),
+                    hintText: 'Digite seu nome',
+                    labelText: 'Nome',
                     prefixIcon:
                     Icon(Icons.account_box_outlined))),
             SizedBox(
@@ -64,7 +68,8 @@ class _CadastroState extends State<Cadastro> {
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(25)
                     ),
-                    label: Text('Digite seu cpf'),
+                    hintText: 'Digite seu cpf',
+                    label: Text("CPF"),
                     prefixIcon:
                     Icon(Icons.person_search))),
             SizedBox(
@@ -76,7 +81,8 @@ class _CadastroState extends State<Cadastro> {
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(25)
                     ),
-                    label: Text('Digite Sua Data de nascimento'),
+                    hintText: 'Digite Sua Data de nascimento',
+                    labelText: 'Data de nascimento',
                     prefixIcon:
                     Icon(Icons.dataset))),
             SizedBox(
@@ -88,7 +94,8 @@ class _CadastroState extends State<Cadastro> {
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(25)
                     ),
-                    label: Text('Digite seu Telefone'),
+                    hintText: 'Digite seu Telefone',
+                    labelText: 'Telefone',
                     prefixIcon:
                     Icon(Icons.phone_android))),
             SizedBox(
@@ -100,7 +107,8 @@ class _CadastroState extends State<Cadastro> {
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(25)
                     ),
-                    label: Text('Digite seu e-mail'),
+                    hintText: 'Digite seu e-mail',
+                    labelText: 'Email',
                     prefixIcon: Icon(Icons.email))),
               SizedBox(
               height: 10),
@@ -111,8 +119,21 @@ class _CadastroState extends State<Cadastro> {
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(25)
                     ),
-                    label: Text('Digite sua senha'), 
+                    hintText: 'Digite sua senha', 
+                    labelText: 'Senha',
                     prefixIcon: Icon(Icons.key_off))),
+              SizedBox(
+              height: 10),
+            TextFormField(
+              keyboardType: TextInputType.name,
+                controller: _convenioController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(25)
+                    ),
+                    hintText: 'Digite seu convênio',
+                    labelText: 'Convênio',
+                    prefixIcon: Icon(Icons.business))),
             SizedBox(
               height: 25,
             ),
@@ -199,7 +220,8 @@ class _CadastroState extends State<Cadastro> {
     email: _emailController.text,
     cpf: _cpfController.text,
     data: _dataController.text,
-    phone: _phoneController.text
+    phone: _phoneController.text,
+    convenio: _convenioController.text
   );
   
   final json = user.toJson();

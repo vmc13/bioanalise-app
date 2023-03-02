@@ -5,6 +5,7 @@ class Usuario{
   final String cpf;
   final String data;
   final String phone;
+  final String convenio;
 
 
   Usuario({
@@ -14,6 +15,7 @@ class Usuario{
     required this.cpf,
     required this.data,
     required this.phone,
+    required this.convenio,
   });
 
   Map<String, dynamic> toJson() => {
@@ -22,7 +24,8 @@ class Usuario{
     'email': email,
     'cpf': cpf,
     'data_nascimento': data,
-    'telefone': phone
+    'telefone': phone,
+    'convenio': convenio
   };
 
   static Usuario fromJson(Map<String, dynamic> json) => Usuario(
@@ -32,6 +35,7 @@ class Usuario{
     cpf: json['cpf'],
     data: json['data_nascimento'],
     phone: json['telefone'],
+    convenio: json['convenio'],
   );
 
   
