@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:async';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -14,6 +15,9 @@ class Fotos extends StatefulWidget {
 }
 
 class _FotosState extends State<Fotos> with SingleTickerProviderStateMixin {
+
+  DatabaseReference ref = FirebaseDatabase.instance.ref("Imagens");
+
   String imageUrl = ' ';
 
   File? imageSelect;
@@ -136,10 +140,13 @@ class _FotosState extends State<Fotos> with SingleTickerProviderStateMixin {
       //Create a Map of data
       Map<String, String> dataToSend = {
         'image': imageUrl,
+        'status': 'não lido'
       };
 
       //Add a new item
       _reference.add(dataToSend);
+
+      await ref.push().set(dataToSend);
 
       print('URL DA IMAGEM: ${imageUrl}');
 
