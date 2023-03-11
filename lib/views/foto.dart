@@ -16,7 +16,7 @@ class Fotos extends StatefulWidget {
 
 class _FotosState extends State<Fotos> with SingleTickerProviderStateMixin {
 
-  DatabaseReference ref = FirebaseDatabase.instance.ref("Imagens");
+  DatabaseReference ref = FirebaseDatabase.instance.ref("Imagens"); // realtime db
 
   String imageUrl = ' ';
 
@@ -25,7 +25,7 @@ class _FotosState extends State<Fotos> with SingleTickerProviderStateMixin {
   final ImagePicker _imagePicker = ImagePicker();
 
   CollectionReference _reference =
-      FirebaseFirestore.instance.collection('gallery');
+      FirebaseFirestore.instance.collection('gallery'); // firestore db
 
   pickImageCamera() async {
     final XFile? image =
@@ -117,6 +117,11 @@ class _FotosState extends State<Fotos> with SingleTickerProviderStateMixin {
             break;
           case TaskState.error:
             print("An error ocurred!");
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('An error ocurred!'),
+                backgroundColor: Colors.redAccent,)
+            );
             break;
           case TaskState.success:
             print("Upload was successful!");
@@ -144,13 +149,19 @@ class _FotosState extends State<Fotos> with SingleTickerProviderStateMixin {
       };
 
       //Add a new item
-      _reference.add(dataToSend);
+      _reference.add(dataToSend); // to firestore
 
-      await ref.push().set(dataToSend);
+      await ref.push().set(dataToSend); // to realtime
 
       print('URL DA IMAGEM: ${imageUrl}');
 
       
+    });
+  }
+
+  clearImage() {
+    setState(() {
+      imageSelect = null;
     });
   }
 
@@ -246,7 +257,9 @@ class _FotosState extends State<Fotos> with SingleTickerProviderStateMixin {
                               horizontal: 30, vertical: 12),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15))),
-                      onPressed: (){}, //clearImage,
+                      onPressed: (){
+                        clearImage();
+                      }, //clearImage,
                       child: const Text(
                         "Eliminar",
                         style: TextStyle(
@@ -260,35 +273,6 @@ class _FotosState extends State<Fotos> with SingleTickerProviderStateMixin {
           ),
         ),
       ),
-      /*
-      bottomNavigationBar: Container(
-        padding: EdgeInsets.all(16.0),
-        child: ClipRRect(
-          borderRadius: BorderRadius.all(Radius.circular(50.0)),
-          child: Container(
-            color: Color.fromARGB(194, 76, 175, 79),
-            child: TabBar(
-              labelColor: Colors.white,
-              labelStyle: TextStyle(fontSize: 15),
-              indicator: UnderlineTabIndicator(
-                  borderSide: BorderSide(color: Color.fromARGB(156, 76, 175, 79), width:
-                  0.0),
-                  insets: EdgeInsets.fromLTRB(50.0, 0.0, 50.0, 40.0)),
-              // for indicator show and customization
-              indicatorColor: Colors.white,
-              tabs: [
-                Tab(
-                  text: 'Camera',
-                  icon: Icon(Icons.camera_alt),
-                ),
-                Tab(text: 'Gallery', icon: Icon(Icons.photo_library)),
-                Tab(text: 'Exit', icon: Icon(Icons.exit_to_app)),
-              ],
-              controller: _tabController,
-            ),
-          ),
-        ),
-      )*/
     );
   }
 }
